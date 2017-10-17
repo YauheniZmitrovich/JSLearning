@@ -24,7 +24,6 @@ for (var i = 0; i < 5; i++) {
     console.log("Element: type = %d, count = %d", typeNum, array[i].count);
 }
 
-function getCount(){
+function getCount() {
     return this.count;
 }
-
