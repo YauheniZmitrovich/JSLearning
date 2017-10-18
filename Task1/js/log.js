@@ -13,10 +13,10 @@
 
     for (i = 0; i < data.length; i++) {
     
-      if (typeof data[i] == "undefined") {
+      if (data[i] === undefined) {
           console.log("data[%d] = не определено", i);
       } 
-      else if (data[i] == null) {
+      else if (data[i] === null) {
           console.log("data[%d] = не указано", i);
       } else {
           console.log("data[%d] = ", i , data[i]);
