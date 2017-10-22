@@ -1,0 +1,15 @@
+.zombie {
+    height: 100px;
+    width: 100px;
+}
+
+.health {
+    height: 5px;
+    width: 50px;
+}
+
+.gif {
+    height: 80%;
+    width: 100%;
+    background: url(../img/default.gif);
+}
