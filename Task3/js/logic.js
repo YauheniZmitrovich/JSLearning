@@ -1,6 +1,13 @@
 window.addEventListener("load", function () {
 
-    document.getElementById("generateBtn").addEventListener("click", generate);
+    var generateBtn = document.getElementById("generateBtn");
+
+    var setColorBtn = document.getElementById("setColorBtn");
+
+    var resetBtn = document.getElementById("resetBtn");
+
+
+    generateBtn.addEventListener("click", generate);
 
 
     function generate() {
@@ -23,11 +30,11 @@ window.addEventListener("load", function () {
           blockAreaElement.appendChild(innerElement);
         }
 
-        buttonService.disableElement(document.getElementById("generateBtn"),generate);
+        buttonService.disableElement(generateBtn, generate);
 
-        buttonService.enableElement(document.getElementById("setColorBtn"),setColor);
+        buttonService.enableElement(setColorBtn, setColor);
 
-        buttonService.enableElement(document.getElementById("resetBtn"),reset);
+        buttonService.enableElement(resetBtn, reset);
     }
 
     function setColor() {
@@ -50,7 +57,7 @@ window.addEventListener("load", function () {
             }
         };
 
-        buttonService.disableElement(document.getElementById("setColorBtn"),setColor);
+        buttonService.disableElement(setColorBtn,setColor);
     }
 
     function reset() {
@@ -58,11 +65,11 @@ window.addEventListener("load", function () {
         var elem = document.getElementById("blockArea").innerHTML = "";
 
 
-        buttonService.disableElement(document.getElementById("setColorBtn"),setColor);
+        buttonService.disableElement(setColorBtn, setColor);
 
-        buttonService.enableElement(document.getElementById("generateBtn"),generate);
+        buttonService.enableElement(generateBtn, generate);
 
-        buttonService.disableElement(document.getElementById("resetBtn"),reset);
+        buttonService.disableElement(resetBtn, reset);
     }
 
 

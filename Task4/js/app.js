@@ -2,16 +2,12 @@ window.addEventListener("load", function () {
 
     var zombieOb;
 
-    var zombieEl;
-
 
     //#region button elements
 
     var generateBtn = document.getElementById("generateBtn");
 
-    var moveBtn = document.getElementById("moveBtn");
-
-    var hitBtn = document.getElementById("hitBtn");
+    var shotBtn = document.getElementById("shotBtn");
 
     //#endregion
 
@@ -20,67 +16,99 @@ window.addEventListener("load", function () {
 
     var generate = function() {
 
-        zombieOb = new Zombie();
+        if(buttonService.isOn(generateBtn)) { //is the button pressed?
 
-        zombieEl = zombieOb.getElement();
+            generateBtn.classList.remove("pressed-button");
 
+        } else {
 
-        var roadElement = document.getElementById("zombieRoad");
+            if(zombieOb == null) {
 
-        roadElement.appendChild(zombieEl);
+                createZombie();
 
+                buttonService.enableElement(shotBtn, shot);
+            }
 
-        //#region button handlers managing
-
-        buttonService.disableElement(generateBtn, generate);
-
-        buttonService.enableElement(moveBtn, move);
-
-        buttonService.enableElement(hitBtn, hit);
-
-
-        zombieOb.on("killed", function () {
-
-            buttonService.enableElement(generateBtn, generate);
-
-            buttonService.disableElement(moveBtn, move);
-
-            buttonService.disableElement(hitBtn, hit);
-        });
-
-        //#endregion
+            generateBtn.classList.add("pressed-button");
+        }
     };
 
     var move = function() {
 
-        var previousMargin = getComputedStyle(zombieEl).marginLeft;
+        var timerId = setTimeout(function tick() {
 
-        var currentMargin = parseInt(previousMargin) - zombieOb.move();
+            var zombieEl = zombieOb.getElement();
 
-        zombieEl.style.marginLeft = currentMargin + "px";
+            var previousMargin = getComputedStyle(zombieEl).marginLeft;
+
+            var currentMargin = parseInt(previousMargin) - zombieOb.move();
+
+            zombieEl.style.marginLeft = currentMargin + "px";
+
+
+            if(currentMargin > 0) {
+
+                timerId = setTimeout(tick, 500);
+            }
+
+        }, 500);
     }
 
-    var hit = function () {
+    var shot = function () {
 
         var damage = 40;
-
-        zombieOb.hit(damage);
 
 
         var healthElement = document.getElementsByClassName("health")[0];
 
-        var currHealthWidth = getComputedStyle(healthElement).width;
+        var previousHealth = parseInt(getComputedStyle(healthElement).width);
 
 
-        var resWidth = parseInt(currHealthWidth) - damage / 2;
+        var resHealth = previousHealth - damage / 2;
 
-        healthElement.style.width =  resWidth + "px";
+        if(resHealth > 0) {
+
+            healthElement.style.width = resHealth + "px";
+        }
+
+        zombieOb.hit(damage);
+    }
+
+
+    function createZombie() {
+
+        zombieOb = new Zombie();
+
+        var zombieEl = zombieOb.getElement();
+
+
+        roadElement = document.getElementById("zombieRoad");
+
+        roadElement.appendChild(zombieEl);
+
+
+        move();
+
+
+        zombieOb.on("killed", function () {
+
+            if(buttonService.isOn(generateBtn)) {
+
+                createZombie();
+
+            } else {
+
+                zombieOb = null;
+
+                buttonService.disableElement(shotBtn, shot);
+            }
+        });
     }
 
     //endregion
 
 
-    document.getElementById("generateBtn").addEventListener("click", generate);
+    generateBtn.addEventListener("click", generate);
 
 
     var buttonService = {
@@ -97,6 +125,11 @@ window.addEventListener("load", function () {
             element.removeEventListener("click", eventFunction);
 
             element.classList.add("unavailable-button");
+        },
+
+        isOn: function (element) {
+
+            return element.classList.contains("pressed-button");
         }
     }
 });

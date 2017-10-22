@@ -38,6 +38,10 @@ body { margin: 275px; }
     color: lightgrey ! important;
 }
 
+.pressed-button {
+    background: chartreuse !important;
+}
+
 .button, .button1, .button2, .button3 {
     border-radius: 6px;
     width: 100px;
@@ -58,10 +62,10 @@ body { margin: 275px; }
     border: 2px solid #1dff18;
 }
 
-.button1:hover {
-    background-color: #1dff18;
-    color: white;
-}
+/*.button1:hover {*/
+    /*background-color: #1dff18;*/
+    /*color: white;*/
+/*}*/
 
 .button2 {
     background-color: white;
