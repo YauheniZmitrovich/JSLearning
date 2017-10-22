@@ -25,7 +25,7 @@ function Zombie() {
 
     //#region fields
 
-    var health = 100;//TODO: public access??
+    var health = 100;
 
     var speed = 10;
 
@@ -46,14 +46,20 @@ function Zombie() {
 
     this.hit = function (damage) {
 
-        if (damage > health) {
+        if (damage >= health) {
 
-            killed();
+            zombieElement.dispatchEvent(killed);
 
         } else {
 
             health -= damage;
         }
+    }
+
+
+    this.getElement = function () {
+
+        return zombieElement;
     }
 
     //#endregion
@@ -63,9 +69,12 @@ function Zombie() {
 
     var killed = new CustomEvent("killed");
 
-    on("killed", function() {
+
+    this.on("killed", function() {
 
         health = 0;
+
+        zombieElement.parentNode.removeChild(zombieElement);
     });
 
     //#endregion
