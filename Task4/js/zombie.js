@@ -9,6 +9,13 @@ function Zombie() {
     //#endregion
 
 
+    //#region events
+
+    var killed = new CustomEvent("killed");
+
+    //#endregion
+
+    
     //#region element creating
 
     var zombieElement = document.createElement("div");
@@ -61,21 +68,6 @@ function Zombie() {
 
         return zombieElement;
     }
-
-    //#endregion
-
-
-    //#region events
-
-    var killed = new CustomEvent("killed");
-
-
-    // this.on("killed", function() {
-    //
-    //     health = 0;
-    //
-    //     zombieElement.parentNode.removeChild(zombieElement);
-    // });
 
     //#endregion
 }
