@@ -92,6 +92,8 @@ window.addEventListener("load", function () {
 
         zombieOb.on("killed", function () {
 
+            zombieEl.parentNode.removeChild(zombieEl);
+
             if(buttonService.isOn(generateBtn)) {
 
                 createZombie();

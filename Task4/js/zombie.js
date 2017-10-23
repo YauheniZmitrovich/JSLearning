@@ -1,33 +1,33 @@
 function Zombie() {
 
-    //#region element creating
-
-        var zombieElement = document.createElement("div");
-
-        var healthElement = document.createElement("div");
-
-        var gifElement = document.createElement("div");
-
-
-        zombieElement.classList.add("zombie");
-
-        healthElement.classList.add("health");
-
-        gifElement.classList.add("gif");
-
-
-        zombieElement.appendChild(healthElement);
-
-        zombieElement.appendChild(gifElement);
-
-    //#endregion
-
-
     //#region fields
 
     var health = 100;
 
     var speed = 10;
+
+    //#endregion
+
+
+    //#region element creating
+
+    var zombieElement = document.createElement("div");
+
+    var healthElement = document.createElement("div");
+
+    var gifElement = document.createElement("div");
+
+
+    zombieElement.classList.add("zombie");
+
+    healthElement.classList.add("health");
+
+    gifElement.classList.add("gif");
+
+
+    zombieElement.appendChild(healthElement);
+
+    zombieElement.appendChild(gifElement);
 
     //#endregion
 
@@ -70,12 +70,12 @@ function Zombie() {
     var killed = new CustomEvent("killed");
 
 
-    this.on("killed", function() {
-
-        health = 0;
-
-        zombieElement.parentNode.removeChild(zombieElement);
-    });
+    // this.on("killed", function() {
+    //
+    //     health = 0;
+    //
+    //     zombieElement.parentNode.removeChild(zombieElement);
+    // });
 
     //#endregion
 }
