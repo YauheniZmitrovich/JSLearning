@@ -43,7 +43,9 @@ function Zombie() {
 
     this.on = function (eventName, eventCallback) {
 
-        events[eventName] = eventCallback;
+        events[eventName] = events[eventName] || [];
+
+        events[eventName].push(eventCallback);
     }
 
     this.move = function () {
@@ -55,7 +57,10 @@ function Zombie() {
 
         if (damage >= health) {
 
-            events["killed"]();
+            for (var i = 0; i < events["killed"].length; i++)
+            {
+                events["killed"][i]();
+            }
 
         } else {
 
