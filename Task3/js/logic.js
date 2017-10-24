@@ -47,13 +47,13 @@ window.addEventListener("load", function () {
         for (var i=0; i < elems.length; i++) {
 
             if(elems[i].innerHTML > 75) {
-                elems[i].style.backgroundColor = "#f44336";
+                elems[i].classList.add("red");
             }
             else if(elems[i].innerHTML > 50) {
-                elems[i].style.backgroundColor = "#ff9800";
+                elems[i].classList.add("orange");
             }
             else if(elems[i].innerHTML > 25) {
-                elems[i].style.backgroundColor = "#4caf50";
+                elems[i].classList.add("green");
             }
         };
 
