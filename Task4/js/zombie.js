@@ -11,7 +11,7 @@ function Zombie() {
 
     //#region events
 
-    var killed = new CustomEvent("killed");
+    var events = {};
 
     //#endregion
 
@@ -43,7 +43,7 @@ function Zombie() {
 
     this.on = function (eventName, eventCallback) {
 
-        zombieElement.addEventListener(eventName, eventCallback);
+        events[eventName] = eventCallback;
     }
 
     this.move = function () {
@@ -55,7 +55,7 @@ function Zombie() {
 
         if (damage >= health) {
 
-            zombieElement.dispatchEvent(killed);
+            events["killed"]();
 
         } else {
 
