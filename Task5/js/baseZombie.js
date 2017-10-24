@@ -1,10 +1,12 @@
-function Zombie() {
+Unit.baseZombie = function (zombieId, zombieClassName) {
 
     //#region fields
 
-    var health = 100;
+    this.id = zombieId;
 
-    var speed = 10;
+    this.health = 100;
+
+    this.speed = 4;
 
     //#endregion
 
@@ -29,7 +31,7 @@ function Zombie() {
 
     healthElement.classList.add("health");
 
-    gifElement.classList.add("gif");
+    gifElement.classList.add(zombieClassName);
 
 
     zombieElement.appendChild(healthElement);
@@ -48,7 +50,7 @@ function Zombie() {
 
     this.move = function () {
 
-        return speed;
+        return this.speed;
     }
 
     this.hit = function (damage) {
