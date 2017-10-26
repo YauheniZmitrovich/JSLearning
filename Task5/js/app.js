@@ -4,6 +4,8 @@ window.addEventListener("load", function () {
 
     var zombies = {};
 
+    var heroes = {};
+
     var timerGeneratingId;
 
 
@@ -43,7 +45,7 @@ window.addEventListener("load", function () {
 
                 var zombieEl = zombies[count].getElement();
 
-                randNum = random(1, 5);
+                randNum = random(0, 5);
 
                 var lineEl = document.getElementById("zombieLine" + randNum);
 
@@ -55,9 +57,9 @@ window.addEventListener("load", function () {
                 count++;
 
 
-                timerGeneratingId = setTimeout(tick, 10000);
+                timerGeneratingId = setTimeout(tick, 2000);
 
-            }, 1000);
+            }, 2000);
         }
         else {
 
@@ -92,6 +94,15 @@ window.addEventListener("load", function () {
 
 
     startBtn.addEventListener("click", start);
+
+
+
+    var plantBtn =  document.getElementById("plantButton");
+
+    plantBtn.addEventListener("click",function () {
+
+        plantBtn.classList.add("pressed-button");
+    });
 
     var buttonService = {
 
