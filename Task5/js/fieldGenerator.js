@@ -27,7 +27,7 @@ window.addEventListener("load", function () {
 
             grassElements[index].addEventListener("click", function () {
 
-                addHero(this.id);
+                heroService.addHero(this.id);
             });
 
 
@@ -39,26 +39,7 @@ window.addEventListener("load", function () {
         zombieField.appendChild(zombieLine);
     }
 
-    function addHero (grassId) {
 
-        var grassIntId = grassId.replace(/\D+/g,"");
-
-        var lineEl = document.getElementById("zombieLine" + parseInt(grassIntId / 12));
-
-        var leftBorder = lineEl.getBoundingClientRect().left
-
-
-        var hero = new Unit.plant(grassIntId, "plant");
-
-        var heroEl = hero.getElement();
-
-
-        var blockOffset = grassIntId%12 * 75;
-
-        heroEl.style.left = leftBorder + blockOffset + 15 + "px";
-
-        lineEl.appendChild(heroEl);
-    };
 
     function isEven(num) {
 

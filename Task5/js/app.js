@@ -2,8 +2,6 @@ window.addEventListener("load", function () {
 
     var startBtn = document.getElementById("startBtn");
 
-    var zombies = {};
-
     var heroes = {};
 
     var timerGeneratingId;
@@ -17,45 +15,7 @@ window.addEventListener("load", function () {
 
             timerGeneratingId = setTimeout(function tick() {
 
-                var count = 0;
-
-                var randNum = random(1, 3);
-
-                switch (randNum) {
-
-                    case 1:
-
-                        zombies[count] = new Unit.simpleZombie(count, "simpleZombie");
-
-                        break;
-
-                    case 2:
-
-                        zombies[count] = new Unit.strongZombie(count, "strongZombie");
-
-                        break;
-
-                    case 3:
-
-                        zombies[count] = new Unit.michaelZombie(count, "michaelZombie");
-
-                        break;
-                }
-
-
-                var zombieEl = zombies[count].getElement();
-
-                randNum = random(0, 5);
-
-                var lineEl = document.getElementById("zombieLine" + randNum);
-
-                lineEl.appendChild(zombieEl);
-
-                move(zombies[count]);
-
-
-                count++;
-
+                zombieService.createZombie();
 
                 timerGeneratingId = setTimeout(tick, 2000);
 
@@ -70,27 +30,6 @@ window.addEventListener("load", function () {
     };
 
 
-    var move = function(zombieOb) {
-
-        var timerMovingId = setTimeout(function tick() {
-
-            var zombieEl = zombieOb.getElement();
-
-            var previousMargin = getComputedStyle(zombieEl).marginLeft;
-
-            var currentMargin = parseInt(previousMargin) - zombieOb.move();
-
-            zombieEl.style.marginLeft = currentMargin + "px";
-
-
-            if(currentMargin > 0) {
-
-                timerMovingId = setTimeout(tick, 200);
-            }
-
-        }, 200);
-    }
-
 
 
     startBtn.addEventListener("click", start);
@@ -104,32 +43,6 @@ window.addEventListener("load", function () {
         plantBtn.classList.add("pressed-button");
     });
 
-    var buttonService = {
-
-        isOnPause: function () {
-
-            return document.getElementById("startBtn").classList.contains("start-button");
-        },
-
-        onPause: function () {
-
-            var el = document.getElementById("startBtn");
-
-            el.classList.remove("start-button");
-
-            el.innerText = "Pause";
-        },
-
-
-        onStart: function () {
-
-            var el = document.getElementById("startBtn");
-
-            el.classList.add("start-button");
-
-            el.innerText = "Start";
-        }
-    }
 });
 //     function createZombie() {
 //

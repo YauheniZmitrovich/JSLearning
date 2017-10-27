@@ -1,7 +1,7 @@
 body {
     margin: 75px 0px 0px 0px;
     height: 768px;
-    width: 1366px;
+    width: 1360px;
     background: url("../img/background.jpg");
     background-size: contain;
 }
@@ -80,10 +80,9 @@ body {
     padding-top: 3px;
     padding-bottom: 1px;
     height: 70px;
-    margin-left: 850px;
     background-size: contain;
     position: absolute;
-    left: 250px;
+    left: 1132px;
 }
 
 .health {
@@ -125,8 +124,7 @@ body {
 }
 
 .plant {
-margin: 10px;
-
+    margin: 10px;
 }
 
 .plant {
@@ -136,6 +134,16 @@ margin: 10px;
     background-size: contain;
 }
 
+
+.bullet {
+    display: inline-block;
+    position: absolute;
+    margin: 18px 0px 0px 60px;
+    height: 18px;
+    width: 20px;
+    background: url(../img/heroes/pea-bullet.png);
+    background-size: contain;
+}
 
 .button-area {
     padding-left: 360px;
@@ -149,7 +157,7 @@ margin: 10px;
     text-align: center;
     display: inline-block;
     font-size: 16px;
-    margin: 20px 45px;
+    margin: 20px 300px;
     padding-top: 15px;
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
@@ -187,6 +195,10 @@ margin: 10px;
     border: 3px solid yellow;
 }
 
+.signature {
+    text-align: center;
+    margin-top: 225px;
+}
 /*.button1:hover {*/
     /*background-color: #1dff18;*/
     /*color: white;*/

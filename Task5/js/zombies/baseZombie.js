@@ -4,16 +4,16 @@ Unit.baseZombie = function (zombieId, zombieClassName) {
 
     this.id = zombieId;
 
-    this.health = 100;
+    this.health =  105;
 
-    this.speed = 4;
+    this.speed = 3;
 
     //#endregion
 
 
     //#region events
 
-    var events = {};
+    this.events = {};
 
     //#endregion
 
@@ -45,9 +45,9 @@ Unit.baseZombie = function (zombieId, zombieClassName) {
 
     this.on = function (eventName, eventCallback) {
 
-        events[eventName] = events[eventName] || [];
+        this.events[eventName] = this.events[eventName] || [];
 
-        events[eventName].push(eventCallback);
+        this.events[eventName].push(eventCallback);
     }
 
     this.move = function () {
@@ -57,16 +57,29 @@ Unit.baseZombie = function (zombieId, zombieClassName) {
 
     this.hit = function (damage) {
 
-        if (damage >= health) {
+        if (damage >= this.health) {
 
-            for (var i = 0; i < events["killed"].length; i++)
+            for (var i = 0; i < this.events["killed"].length; i++)
             {
-                events["killed"][i]();
+                this.events["killed"][i]();
             }
 
         } else {
 
-            health -= damage;
+            this.health -= damage;
+
+
+            var healthElement = zombieElement.firstElementChild;
+
+            var previousHealth = parseInt(getComputedStyle(healthElement).width);
+
+
+            var resHealth = previousHealth - damage / 3;
+
+            if(resHealth > 0) {
+
+                healthElement.style.width = resHealth + "px";
+            }
         }
     }
 

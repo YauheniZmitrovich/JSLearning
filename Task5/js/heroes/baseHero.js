@@ -4,6 +4,8 @@ Unit.baseHero = function (heroId, heroClassName) {
 
     this.id = heroId;
 
+    this.speed = 10;
+
     //#endregion
 
 
@@ -19,6 +21,7 @@ Unit.baseHero = function (heroId, heroClassName) {
     var heroElement = document.createElement("div");
 
     var gifElement = document.createElement("div");
+
 
     heroElement.classList.add("hero");
 
@@ -42,6 +45,11 @@ Unit.baseHero = function (heroId, heroClassName) {
     this.getElement = function () {
 
         return heroElement;
+    }
+
+    this.bulletSpeed = function () {
+
+        return this.speed;
     }
 
     //#endregion
