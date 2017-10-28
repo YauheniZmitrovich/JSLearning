@@ -1,5 +1,7 @@
 var heroService = {
 
+    timerHeroAdditionId : null,
+
     addHero : function(grassId) {
 
         var grassIntId = grassId.replace(/\D+/g,"");
@@ -21,15 +23,25 @@ var heroService = {
         lineEl.appendChild(heroEl);
 
 
-        timerHeroAdditionId = setTimeout(function tick() {
+        heroService.timerHeroAdditionId = setTimeout(function tick() {
 
             heroService.addBullet(lineEl, offset);
 
-            timerHeroAdditionId = setTimeout(tick, 1000);
+            heroService.timerHeroAdditionId = setTimeout(tick, 1000);
         }, 10);
     },
 
     moveBullet : function(bulletEl) {
+
+        zombieService.on("gameOver", function () {
+
+            clearTimeout(timerMovingId);
+        });
+
+        zombieService.on("victory", function () {
+
+            clearTimeout(timerMovingId);
+        });
 
         var timerMovingId = setTimeout(function tick() {
 
@@ -122,5 +134,10 @@ var heroService = {
         var bulletOffset = bulletEl.getBoundingClientRect().left
 
         return zombieOffset <= bulletOffset;
+    },
+
+    clearAll : function () {
+
+        clearTimeout(heroService.timerHeroAdditionId);
     }
 }

@@ -1,10 +1,8 @@
 window.addEventListener("load", function () {
 
-    var startBtn = document.getElementById("startBtn");
+    fieldService.generate();
 
-    var heroes = {};
-
-    var timerGeneratingId;
+    var zombieNumPerLevel = 6;
 
 
     var start = function () {
@@ -13,11 +11,25 @@ window.addEventListener("load", function () {
 
             buttonService.onPause();
 
+            document.getElementById("zombieField").classList.remove("gameOver");
+
+            document.getElementById("zombieField").classList.remove("victory");
+
+
+            var count = 0;
+
             timerGeneratingId = setTimeout(function tick() {
 
                 zombieService.createZombie();
 
+                count++;
+
                 timerGeneratingId = setTimeout(tick, 2000);
+
+                if(count == zombieNumPerLevel) {
+
+                    clearTimeout(timerGeneratingId);
+                }
 
             }, 2000);
         }
@@ -27,13 +39,23 @@ window.addEventListener("load", function () {
 
             clearTimeout(timerGeneratingId);
         }
+
+        zombieService.on("gameOver", function () {
+
+            resetGame("gameOver");
+        });
+
+        zombieService.on("victory", function () {
+
+            resetGame("victory")
+
+            zombieNumPerLevel += 5;
+        });
     };
 
-
-
+    var startBtn = document.getElementById("startBtn");
 
     startBtn.addEventListener("click", start);
-
 
 
     var plantBtn =  document.getElementById("plantButton");
@@ -43,6 +65,24 @@ window.addEventListener("load", function () {
         plantBtn.classList.add("pressed-button");
     });
 
+    function resetGame(styleClassName) {
+
+        clearTimeout(zombieService.timerMovingId);
+
+        clearTimeout(timerGeneratingId);
+
+
+        var zombieFieldEl = document.getElementById("zombieField");
+
+        zombieFieldEl.innerHTML = "";
+
+        zombieFieldEl.classList.add(styleClassName);
+
+
+        buttonService.onStart();
+
+        startBtn.addEventListener("click", fieldService.generate);
+    }
 });
 //     function createZombie() {
 //

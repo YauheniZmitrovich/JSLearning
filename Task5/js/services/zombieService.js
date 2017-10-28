@@ -2,8 +2,14 @@ var zombies = [];
 
 var count = 0;
 
+var deadCount = 0;
+
 
 var zombieService = {
+
+    timerMovingId : null,
+
+    events : {},
 
     createZombie : function () {
 
@@ -53,6 +59,20 @@ var zombieService = {
             var el = zombieOb.getElement();
 
             el.parentNode.removeChild(el);
+
+            zombies[index] = null;
+
+            deadCount++;
+
+            if(deadCount == count - 1) {
+
+                clearTimeout(zombieService.timerMovingId);
+
+                for (var i = 0; i < zombieService.events["victory"].length; i++)
+                {
+                    zombieService.events["victory"][i]();
+                }
+            }
         });
 
 
@@ -63,7 +83,7 @@ var zombieService = {
 
     moveZombie : function(zombieOb) {
 
-        var timerMovingId = setTimeout(function tick() {
+        zombieService.timerMovingId = setTimeout(function tick() {
 
             var zombieEl = zombieOb.getElement();
 
@@ -74,9 +94,22 @@ var zombieService = {
             zombieEl.style.left = currentOffset + "px";
 
 
-            if(currentOffset > 260) {
+            if(currentOffset < 260) {
 
-                timerMovingId = setTimeout(tick, 140);
+                clearTimeout(zombieService.timerMovingId);
+
+                for (var i = 0; i < zombieService.events["gameOver"].length; i++)
+                {
+                    zombieService.events["gameOver"][i]();
+                }
+
+                zombieService.clearAll();
+
+                heroService.clearAll();
+            }
+            else {
+
+                zombieService.timerMovingId = setTimeout(tick, 140);
             }
 
         }, 20);
@@ -95,4 +128,21 @@ var zombieService = {
         zombieOb.hit(damage);
     },
 
+    clearAll : function () {
+
+        zombies = [];
+
+        count = 0;
+
+        deadCount = 0;
+
+        clearTimeout(zombieService.timerMovingId);
+    },
+
+    on : function (eventName, eventCallback) {
+
+        zombieService.events[eventName] = zombieService.events[eventName] || [];
+
+        zombieService.events[eventName].push(eventCallback);
+    }
 }

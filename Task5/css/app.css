@@ -112,7 +112,7 @@ body {
 .michaelZombie {
     background: url(../img/zombies/michael.gif);
     background-size: contain;
-    width: 36px;
+    width: 37px;
 }
 
 
@@ -165,7 +165,7 @@ body {
     border: 2px solid black;
 }
 .pause-button {
-    background: yellow;
+    background: limegreen;
 }
 
 .start-button {
@@ -196,9 +196,29 @@ body {
 }
 
 .signature {
-    text-align: center;
+    margin-left: 630px;
     margin-top: 225px;
+    color: darkgreen;
 }
+
+.gameOver, .victory {
+    display: inline-block;
+    border: 10px solid forestgreen;
+}
+
+.gameOver {
+    background: url("../img/gameOver.gif");
+    background-size: cover;
+    background-position-y: center;
+}
+
+.victory {
+    background: url("../img/victory.png");
+    background-size: cover;
+    background-position-y: center;
+}
+
+
 /*.button1:hover {*/
     /*background-color: #1dff18;*/
     /*color: white;*/

@@ -1,9 +1,4 @@
 
-var generateBtn = document.getElementById("generateBtn");
-
-var shotBtn = document.getElementById("shotBtn");
-
-
 var buttonService = {
 
     isOnPause: function () {
@@ -17,6 +12,8 @@ var buttonService = {
 
         el.classList.remove("start-button");
 
+        el.classList.add("pause-button");
+
         el.innerText = "Pause";
     },
 
@@ -24,6 +21,8 @@ var buttonService = {
     onStart: function () {
 
         var el = document.getElementById("startBtn");
+
+        el.classList.remove("pause-button");
 
         el.classList.add("start-button");
 
