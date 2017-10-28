@@ -2,8 +2,6 @@ var zombies = [];
 
 var count = 0;
 
-var deadCount = 0;
-
 
 var zombieService = {
 
@@ -61,18 +59,6 @@ var zombieService = {
             el.parentNode.removeChild(el);
 
             zombies[index] = null;
-
-            deadCount++;
-
-            if(deadCount == count - 1) {
-
-                clearTimeout(zombieService.timerMovingId);
-
-                for (var i = 0; i < zombieService.events["victory"].length; i++)
-                {
-                    zombieService.events["victory"][i]();
-                }
-            }
         });
 
 
@@ -124,8 +110,10 @@ var zombieService = {
 
         var zombieOb = zombies[index];
 
+        if(zombieOb != null) {
 
-        zombieOb.hit(damage);
+            zombieOb.hit(damage);
+        }
     },
 
     clearAll : function () {
@@ -133,8 +121,6 @@ var zombieService = {
         zombies = [];
 
         count = 0;
-
-        deadCount = 0;
 
         clearTimeout(zombieService.timerMovingId);
     },

@@ -2,8 +2,6 @@ window.addEventListener("load", function () {
 
     fieldService.generate();
 
-    var zombieNumPerLevel = 6;
-
 
     var start = function () {
 
@@ -11,10 +9,7 @@ window.addEventListener("load", function () {
 
             buttonService.onPause();
 
-            document.getElementById("zombieField").classList.remove("gameOver");
-
-            document.getElementById("zombieField").classList.remove("victory");
-
+            document.getElementById("zombieField").classList.remove("gameOver");//TODO
 
             var count = 0;
 
@@ -25,12 +20,6 @@ window.addEventListener("load", function () {
                 count++;
 
                 timerGeneratingId = setTimeout(tick, 2000);
-
-                if(count == zombieNumPerLevel) {
-
-                    clearTimeout(timerGeneratingId);
-                }
-
             }, 2000);
         }
         else {
@@ -43,13 +32,6 @@ window.addEventListener("load", function () {
         zombieService.on("gameOver", function () {
 
             resetGame("gameOver");
-        });
-
-        zombieService.on("victory", function () {
-
-            resetGame("victory")
-
-            zombieNumPerLevel += 5;
         });
     };
 
