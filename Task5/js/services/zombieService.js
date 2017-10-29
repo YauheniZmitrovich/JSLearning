@@ -7,7 +7,11 @@ var zombieService = {
 
     timerMovingId : null,
 
+    numZombiePerLevel : 6,
+
     events : {},
+
+    wasKilled : 0,
 
     createZombie : function () {
 
@@ -52,6 +56,8 @@ var zombieService = {
 
         zombieOb.on("killed", function () {
 
+            zombieService.wasKilled++;
+
             var zombieOb = zombies[index];
 
             var el = zombieOb.getElement();
@@ -59,6 +65,14 @@ var zombieService = {
             el.parentNode.removeChild(el);
 
             zombies[index] = null;
+
+            if(zombieService.isAllZombieKilled()) {
+
+                for (var i = 0; i < zombieService.events["victory"].length; i++)
+                {
+                    zombieService.events["victory"][i]();
+                }
+            }
         });
 
 
@@ -116,11 +130,22 @@ var zombieService = {
         }
     },
 
+    isAllZombieKilled : function () {
+
+        var num = document.getElementsByClassName("zombie").length;
+
+        return num == 0 && zombieService.wasKilled == zombieService.numZombiePerLevel;
+    },
+
     clearAll : function () {
 
         zombies = [];
 
         count = 0;
+
+        zombieService.numZombiePerLevel = 0;
+
+        zombieService.wasKilled = 0;
 
         clearTimeout(zombieService.timerMovingId);
     },

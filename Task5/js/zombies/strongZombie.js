@@ -6,6 +6,6 @@ Unit.strongZombie = function (id) {
 
     this.hit = function (damage) {
 
-        baseHit.call(this,damage / 2);
+        baseHit.call(this, damage / 2);
     }
 };

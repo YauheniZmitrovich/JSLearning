@@ -66,15 +66,13 @@ Unit.baseZombie = function (zombieId, zombieClassName) {
 
         } else {
 
-            this.health -= damage;
-
-
             var healthElement = zombieElement.firstElementChild;
 
-            var previousHealth = parseInt(getComputedStyle(healthElement).width);
-
+            var previousHealth = parseInt(getComputedStyle(healthElement).width, 10);
 
             var resHealth = previousHealth - damage / 3;
+
+            this.health = resHealth * 3;//cuz troubles with parsing
 
             if(resHealth > 0) {
 
