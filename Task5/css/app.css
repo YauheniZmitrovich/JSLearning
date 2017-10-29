@@ -1,7 +1,7 @@
 body {
     margin: 75px 0px 0px 0px;
     height: 768px;
-    width: 1360px;
+    width: 1366px;
     background: url("../img/background.jpg");
     background-size: contain;
 }
@@ -91,11 +91,9 @@ body {
     background: red;
 }
 
-.simpleZombie, .strongZombie, .michaelZombie {
-    background-size: contain;
+.simpleZombie, .strongZombie, .michaelZombie, .simpleZombie-die, .strongZombie-die, .michaelZombie-die {
     height: 55px;
     width: 38px;
-    z-index: 1;
 }
 
 .simpleZombie {
@@ -111,6 +109,23 @@ body {
 
 .michaelZombie {
     background: url(../img/zombies/michael.gif);
+    background-size: contain;
+    width: 37px;
+}
+
+.simpleZombie-die {
+    background: url(../img/zombies/default-die.png);
+    background-size: contain;
+}
+
+.strongZombie-die {
+    background: url(../img/zombies/strong-die.gif);
+    background-size: contain;
+    width: 50px;
+}
+
+.michaelZombie-die {
+    background: url(../img/zombies/michael-die.gif);
     background-size: contain;
     width: 37px;
 }
@@ -198,7 +213,7 @@ body {
 .signature {
     margin-left: 630px;
     margin-top: 225px;
-    color: darkgreen;
+    color: black;
 }
 
 .gameOver, .victory {
@@ -217,12 +232,6 @@ body {
     background-size: cover;
     background-position-y: center;
 }
-
-
-/*.button1:hover {*/
-    /*background-color: #1dff18;*/
-    /*color: white;*/
-/*}*/
 
 .button2 {
     background-color: white;

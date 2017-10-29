@@ -2,6 +2,10 @@ window.addEventListener("load", function () {
 
     fieldService.generate();
 
+    var level = 1;
+
+    var count = 0;
+
 
     var start = function () {
 
@@ -13,8 +17,6 @@ window.addEventListener("load", function () {
 
             document.getElementById("zombieField").classList.remove("victory");
 
-
-            var count = 0;
 
             timerGeneratingId = setTimeout(function tick() {
 
@@ -54,6 +56,8 @@ window.addEventListener("load", function () {
     zombieService.on("gameOver", function () {
 
         resetGame("gameOver");
+
+        buttonService.onStart("Try again");
     });
 
     zombieService.on("victory", function () {
@@ -61,6 +65,11 @@ window.addEventListener("load", function () {
         resetGame("victory");
 
         zombieService.numZombiePerLevel += 5;
+
+        level++;
+
+
+        buttonService.onStart("Level " + level);
     });
 
     function resetGame(styleClassName) {
@@ -69,6 +78,8 @@ window.addEventListener("load", function () {
 
         clearTimeout(timerGeneratingId);
 
+        count = 0;
+
         zombieService.clearAll();
 
         heroService.clearAll();
@@ -76,12 +87,10 @@ window.addEventListener("load", function () {
 
         var zombieFieldEl = document.getElementById("zombieField");
 
-        zombieFieldEl.innerHTML = "";
+        while(zombieFieldEl.firstChild) zombieFieldEl.removeChild(zombieFieldEl.firstChild);
 
         zombieFieldEl.classList.add(styleClassName);
 
-
-        buttonService.onStart();
 
         startBtn.addEventListener("click", fieldService.generate);
     }

@@ -59,6 +59,16 @@ Unit.baseZombie = function (zombieId, zombieClassName) {
 
         if (damage >= this.health) {
 
+            gifElement.classList.remove(zombieClassName);
+
+            var className = zombieClassName.concat("-die");
+
+            gifElement.classList.add(className);
+
+            var timerDieId = setTimeout( function tick () {
+
+            }, 2000);
+
             for (var i = 0; i < this.events["killed"].length; i++)
             {
                 this.events["killed"][i]();

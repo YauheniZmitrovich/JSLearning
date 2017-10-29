@@ -18,7 +18,7 @@ var buttonService = {
     },
 
 
-    onStart: function () {
+    onStart: function (text) {
 
         var el = document.getElementById("startBtn");
 
@@ -26,6 +26,6 @@ var buttonService = {
 
         el.classList.add("start-button");
 
-        el.innerText = "Start";
+        el.innerText = text || "Start";
     }
 }

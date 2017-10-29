@@ -41,7 +41,7 @@ var zombieService = {
 
         var zombieEl = zombies[count].getElement();
 
-        zombieEl.id = "zombie" + count;
+        zombieEl.id = "zombie" + (count + zombieService.numZombiePerLevel - 6);
 
         randNum = random(0, 5);
 
@@ -76,14 +76,37 @@ var zombieService = {
         });
 
 
-        zombieService.moveZombie(zombies[count]);
+        zombieService.moveZombie(zombieOb);
 
         count++;
     },
 
     moveZombie : function(zombieOb) {
 
-        zombieService.timerMovingId = setTimeout(function tick() {
+        var timerMovingId;
+
+        zombieOb.on("killed", function () {
+
+            var tempTimer = timerMovingId;
+
+            clearTimeout(tempTimer);
+        });
+
+        zombieService.on("victory", function () {
+
+            var tempTimer = timerMovingId;
+
+            clearTimeout(tempTimer);
+        });
+
+        zombieService.on("gameOver", function () {
+
+            var tempTimer = timerMovingId;
+
+            clearTimeout(tempTimer);
+        });
+
+        timerMovingId = setTimeout(function tick() {
 
             var zombieEl = zombieOb.getElement();
 
@@ -96,31 +119,27 @@ var zombieService = {
 
             if(currentOffset < 260) {
 
-                clearTimeout(zombieService.timerMovingId);
+                clearTimeout(timerMovingId);
 
                 for (var i = 0; i < zombieService.events["gameOver"].length; i++)
                 {
                     zombieService.events["gameOver"][i]();
                 }
-
-                zombieService.clearAll();
-
-                heroService.clearAll();
             }
             else {
 
-                zombieService.timerMovingId = setTimeout(tick, 140);
+               timerMovingId = setTimeout(tick, 140);
             }
 
         }, 20);
+
     },
 
     shot : function (zombieEl) {
 
         var damage = 18;
 
-
-        var index = parseInt(zombieEl.id.replace(/\D+/g,""));
+        var index = parseInt(zombieEl.id.replace(/\D+/g,"") ) - zombieService.numZombiePerLevel + 6;
 
         var zombieOb = zombies[index];
 
@@ -139,13 +158,13 @@ var zombieService = {
 
     clearAll : function () {
 
+        clearTimeout(zombieService.timerMovingId);
+
         zombies = [];
 
         count = 0;
 
         zombieService.wasKilled = 0;
-
-        clearTimeout(zombieService.timerMovingId);
     },
 
     on : function (eventName, eventCallback) {
