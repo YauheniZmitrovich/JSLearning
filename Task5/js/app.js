@@ -37,16 +37,6 @@ window.addEventListener("load", function () {
 
             clearTimeout(timerGeneratingId);
         }
-
-        zombieService.on("gameOver", function () {
-
-            resetGame("gameOver");
-        });
-
-        zombieService.on("victory", function () {
-
-            resetGame("victory");
-        });
     };
 
     var startBtn = document.getElementById("startBtn");
@@ -61,11 +51,27 @@ window.addEventListener("load", function () {
         plantBtn.classList.add("pressed-button");
     });
 
+    zombieService.on("gameOver", function () {
+
+        resetGame("gameOver");
+    });
+
+    zombieService.on("victory", function () {
+
+        resetGame("victory");
+
+        zombieService.numZombiePerLevel += 5;
+    });
+
     function resetGame(styleClassName) {
 
         clearTimeout(zombieService.timerMovingId);
 
         clearTimeout(timerGeneratingId);
+
+        zombieService.clearAll();
+
+        heroService.clearAll();
 
 
         var zombieFieldEl = document.getElementById("zombieField");
@@ -74,8 +80,6 @@ window.addEventListener("load", function () {
 
         zombieFieldEl.classList.add(styleClassName);
 
-
-        zombieService.numZombiePerLevel += 5;
 
         buttonService.onStart();
 

@@ -143,8 +143,6 @@ var zombieService = {
 
         count = 0;
 
-        zombieService.numZombiePerLevel = 0;
-
         zombieService.wasKilled = 0;
 
         clearTimeout(zombieService.timerMovingId);
