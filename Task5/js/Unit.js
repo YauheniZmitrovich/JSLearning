@@ -1,6 +1,1 @@
-var Unit;
-
-if (!Unit) {
-    
-    Unit = {};
-}
+var Unit = {};
