@@ -46,13 +46,6 @@ window.addEventListener("load", function () {
     startBtn.addEventListener("click", start);
 
 
-    var plantBtn =  document.getElementById("plantButton");
-
-    plantBtn.addEventListener("click",function () {
-
-        plantBtn.classList.add("pressed-button");
-    });
-
     zombieService.on("gameOver", function () {
 
         resetGame("gameOver");
