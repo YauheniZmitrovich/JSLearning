@@ -6,8 +6,6 @@ body {
     background-size: contain;
 }
 
-
-
 .control-panel {
     display: inline-block;
     height: 380px;
@@ -61,7 +59,6 @@ body {
     filter:alpha(opacity=50);
 }
 
-
 .zombieLine1 {
     height: 75px;
     width: 900px;
@@ -73,7 +70,6 @@ body {
     width: 900px;
     background-image: url("../img/grass-even.png");
 }
-
 
 .zombie {
     display: inline-block;
@@ -137,7 +133,6 @@ body {
     background-size: contain;
     width: 55px;
 }
-
 
 .hero {
     display: inline-block;
