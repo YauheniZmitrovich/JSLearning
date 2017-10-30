@@ -113,21 +113,29 @@ body {
     width: 37px;
 }
 
+.diedZombie {
+    display: inline-block;
+    padding-top: 3px;
+    padding-bottom: 1px;
+    position: absolute;
+}
+
 .simpleZombie-die {
     background: url(../img/zombies/default-die.png);
     background-size: contain;
+    width: 50px;
 }
 
 .strongZombie-die {
     background: url(../img/zombies/strong-die.gif);
     background-size: contain;
-    width: 50px;
+    width: 62px;
 }
 
 .michaelZombie-die {
     background: url(../img/zombies/michael-die.gif);
     background-size: contain;
-    width: 37px;
+    width: 55px;
 }
 
 

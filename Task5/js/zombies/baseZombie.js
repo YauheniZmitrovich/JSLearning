@@ -59,20 +59,32 @@ Unit.baseZombie = function (zombieId, zombieClassName) {
 
         if (damage >= this.health) {
 
-            gifElement.classList.remove(zombieClassName);
+            var leftOffset = parseInt(getComputedStyle(zombieElement).left);
 
-            var className = zombieClassName.concat("-die");
-
-            gifElement.classList.add(className);
-
-            var timerDieId = setTimeout( function tick () {
-
-            }, 2000);
+            var lineEl = zombieElement.parentNode;
 
             for (var i = 0; i < this.events["killed"].length; i++)
             {
                 this.events["killed"][i]();
             }
+
+            var diedElement = document.createElement("div");
+
+            diedElement.classList.add("diedZombie");
+
+            diedElement.classList.add(zombieClassName.concat("-die"));
+
+            diedElement.style.left = leftOffset - 15 + "px";
+
+            lineEl.appendChild(diedElement);
+
+
+            var timerDieId = setTimeout( function tick () {
+
+                diedElement.parentNode.removeChild(diedElement);
+
+            }, 400);
+
 
         } else {
 
