@@ -6,6 +6,8 @@ window.addEventListener("load", function () {
 
     var count = 0;
 
+    var zombieGenerationTick = 2000;
+
 
     var start = function () {
 
@@ -24,14 +26,14 @@ window.addEventListener("load", function () {
 
                 count++;
 
-                timerGeneratingId = setTimeout(tick, 2000);
+                timerGeneratingId = setTimeout(tick, zombieGenerationTick);
 
                 if(count == zombieService.numZombiePerLevel) {
 
                     clearTimeout(timerGeneratingId);
                 }
 
-            }, 2000);
+            }, zombieGenerationTick);
         }
         else {
 
@@ -57,7 +59,9 @@ window.addEventListener("load", function () {
 
         resetGame("victory");
 
-        zombieService.numZombiePerLevel += 5;
+        zombieService.numZombiePerLevel += 15;
+
+        zombieGenerationTick *= 0.7;
 
         level++;
 
